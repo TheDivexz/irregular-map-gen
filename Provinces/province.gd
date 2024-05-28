@@ -46,7 +46,7 @@ func set_biome(e : float,m : float):
 	var ny = (2 * centroid.y / 1080) - 1
 	var square_bump = 1 - ((1-pow(nx,2)) * (1-pow(ny,2)))
 	var euclidian_squared = min(1,(pow(nx,2) + pow(ny,2))/sqrt(2.0))
-	elevation = linear_interpolation(elevation,1-euclidian_squared,0.5)
+	elevation = linear_interpolation(elevation,1-euclidian_squared,0.1)
 	biome = calc_biome()
 	$shape.color = calc_terrain_color()
 
