@@ -10,7 +10,6 @@ func _ready():
 	noise_type.set_seed(randi())
 	noise_data.set_noise(noise_type)
 	set_texture(noise_data)
-	print(noise_data)
 	pass # Replace with function body.
 
 

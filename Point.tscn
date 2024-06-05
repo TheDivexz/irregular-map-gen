@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://wn17p18wiiwx"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_xhqlk"]
-
-[node name="Point" type="Node2D"]
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-scale = Vector2(5, 5)
-mesh = SubResource("SphereMesh_xhqlk")

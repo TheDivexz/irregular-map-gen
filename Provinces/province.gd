@@ -37,7 +37,7 @@ func _process(delta):
 func rgb_to_color(r : float,g : float,b : float) -> Color:
 	return Color(r/255.0,g/255.0,b/255.0)
 
-func set_biome(e : float,m : float):
+func set_biome(e : float,m : float,is_water : bool):
 	elevation = e
 	moisture = m
 	# Increase the Exponent to make more provinces ocean
@@ -47,6 +47,10 @@ func set_biome(e : float,m : float):
 	var square_bump = 1 - ((1-pow(nx,2)) * (1-pow(ny,2)))
 	var euclidian_squared = min(1,(pow(nx,2) + pow(ny,2))/sqrt(2.0))
 	elevation = linear_interpolation(elevation,1-euclidian_squared,0.1)
+	if is_water:
+		elevation *= 0.1
+	elif elevation < 0.1:
+		elevation += randf_range(0.1,0.9)
 	biome = calc_biome()
 	$shape.color = calc_terrain_color()
 

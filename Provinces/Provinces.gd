@@ -5,6 +5,7 @@ const RELAXATION = 2
 var province = preload("res://Provinces/province.tscn")
 @onready var elevetion_noise = $"../Noise"
 @onready var moisture_noise = $"../Moisture"
+@onready var cellular_automata = $"../Cellular_Automata"
 var elevation_noise_data : Noise
 var moisture_noise_data : Noise
 
@@ -16,6 +17,8 @@ func _ready():
 	elevation_noise_data = elevetion_noise.texture.get_noise()
 	moisture_noise_data = moisture_noise.texture.get_noise()
 	create_provinces()
+	cellular_automata.ordered_list = []
+	cellular_automata.next_itr = []
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -91,6 +94,7 @@ func generate_provinces():
 					corners[index].y = MAP_HEIGHT
 				index += 1
 			new_province.get_child(0).polygon = corners
+			new_province.centroid = centroid(new_province.get_child(0).polygon)
 		add_child(new_province)
 		# calculates the neighbors
 		for p in provinces:
@@ -101,7 +105,7 @@ func generate_provinces():
 					new_province.neighbors.append(p)
 		# Determine Elevation of the province
 		var biome_info = calculate_biome(new_province.centroid)
-		new_province.set_biome(biome_info.x,biome_info.y)
+		new_province.set_biome(biome_info.x,biome_info.y,calculate_iswater(new_province.centroid))
 		provinces.append(new_province)
 
 # Relaxes the centroids of the polygons n number of times
@@ -123,3 +127,8 @@ func calculate_biome(location : Vector2) -> Vector2:
 	var elevation = elevation_noise_data.get_noise_2dv(location) + 0.5
 	var moisture = moisture_noise_data.get_noise_2dv(location) + 0.5
 	return(Vector2(elevation,moisture))
+
+func calculate_iswater(location: Vector2):
+	var x_val : int = location.x / 10
+	var y_val : int = location.y / 10
+	return(cellular_automata.ordered_list[x_val + (y_val * cellular_automata.X_SIZE)])

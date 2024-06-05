@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://jyvsoio8hqs2"]
+[gd_scene load_steps=8 format=3 uid="uid://jyvsoio8hqs2"]
 
+[ext_resource type="Script" path="res://Cellular_Automata.gd" id="1_11emx"]
 [ext_resource type="Script" path="res://Noise.gd" id="1_n5qrw"]
 [ext_resource type="Script" path="res://Provinces/Provinces.gd" id="2_lc7vs"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="3_s2i8j"]
@@ -17,6 +18,9 @@ height = 1080
 noise = SubResource("FastNoiseLite_mbhdg")
 
 [node name="Main" type="Node2D"]
+
+[node name="Cellular_Automata" type="Node" parent="."]
+script = ExtResource("1_11emx")
 
 [node name="Moisture" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
