@@ -34,6 +34,7 @@ script = ExtResource("1_n5qrw")
 
 [node name="Provinces" type="Node2D" parent="."]
 script = ExtResource("2_lc7vs")
+province_count = 500
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(917, 476)

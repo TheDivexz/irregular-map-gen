@@ -24,6 +24,7 @@ var isLand = true # True means Land False means Water
 var elevation = 0
 var moisture = 0
 var biome : BIOMES
+var noisy_border := false # to keep track if the borders have been "noised"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
